@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="9486-TeamErlang_MidAct02-Ant" default="build" basedir=".">
+
+    <!-- ================================= 1. PROPERTIES (Variables) ================================= -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="doc.dir" value="doc"/>
+
+    <property name="main.class.name" value="MasterTestRunner"/>
+    <property name="class" value="MasterTestRunner"/>
+    <property name="jar.name.classes" value="LeetCodeSolutions.jar"/>
+    <property name="jar.name.docs" value="LeetCodeDocs.jar"/>
+
+    <path id="master.classpath">
+        <pathelement location="${build.dir}"/>
+    </path>
+
+    <!-- ================================= 2. MISCELLANEOUS TASKS (Clean & Init) ================================= -->
+
+    <target name="clean" description="Deletes build, dist, and doc directories">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${doc.dir}"/>
+    </target>
+
+    <target name="init" depends="clean" description="Creates required output folders">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- ================================= 3. COMPILATION TASKS ================================= -->
+
+    <!-- Compile the entire code base -->
+    <target name="compile" depends="init" description="Compiles the entire codebase.">
+        <echo message="Compiling all source files..."/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="on" includeantruntime="false"/>
+    </target>
+
+    <!-- Compile only a given source code -->
+    <!-- Usage: ant compile-file -Dfile=path/to/SingleFile.java -->
+    <target name="compile-file" depends="init" description="Compiles a single file supplied by the 'file' property">
+        <fail unless="file" message="You must supply the source 'file' property."/>
+        <echo message="Compiling single file: ${file}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="on" includeantruntime="false">
+            <include name="${file}"/>
+        </javac>
+    </target>
+
+    <!-- ================================= 4. EXECUTION TASKS ================================= -->
+
+    <!-- Execute the designated main file of the project -->
+    <target name="execute-main" depends="compile" description="Executes the designated main class (MasterTestRunner)">
+        <echo message="Executing main class: ${main.class.name}"/>
+        <java classname="${main.class.name}" fork="true">
+            <classpath refid="master.classpath"/>
+        </java>
+    </target>
+
+    <!-- Usage: ant execute-single -Dclass=MySolutionClass -->
+    <target name="execute-single" depends="compile" description="Executes a specified class (supply -Dclass=...)">
+        <fail unless="class" message="You must supply the 'class' property for execution."/>
+        <echo message="Executing class: ${class}"/>
+        <java classname="${class}" fork="true">
+            <classpath refid="master.classpath"/>
+        </java>
+    </target>
+
+    <!-- ================================= 5. DOCUMENTATION TASK ================================= -->
+
+    <target name="javadoc" depends="compile" description="Generates documentation in the 'doc' folder">
+        <mkdir dir="${doc.dir}"/>
+        <echo message="Generating Javadoc documentation..."/>
+        <javadoc destdir="${doc.dir}" sourcepath="${src.dir}" packagenames="*">
+            <classpath refid="master.classpath"/>
+        </javadoc>
+    </target>
+
+    <!-- ================================= 6. JAR CREATION TASKS ================================= -->
+
+    <target name="jar-classes" depends="compile" description="Creates JAR of compiled classes">
+        <echo message="Creating JAR: ${jar.name.classes}"/>
+        <jar destfile="${dist.dir}/${jar.name.classes}" basedir="${build.dir}"/>
+    </target>
+
+    <target name="jar-docs" depends="javadoc" description="Creates JAR of documentation files">
+        <echo message="Creating JAR: ${jar.name.docs}"/>
+        <jar destfile="${dist.dir}/${jar.name.docs}" basedir="${doc.dir}"/>
+    </target>
+
+    <!-- ================================= 7. MASTER TARGETS ================================= -->
+
+    <target name="build" depends="jar-classes, jar-docs" description="Runs the full build process."/>
+
+    <target name="default" depends="build"/>
+
+</project>
