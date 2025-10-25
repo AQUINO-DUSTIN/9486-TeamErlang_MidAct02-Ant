@@ -1,44 +1,38 @@
 # LeetCode Pair Programming Archive
 
-This repository contains a collection of Java solutions developed during pair programming sessions, managed entirely by a highly functional **Apache Ant** build script.
+This repository contains a collection of Java solutions managed by a robust **Apache Ant** build script, which automates the entire development, testing, and packaging process.
 
-The `build.xml` automates the entire development workflow, ensuring clean builds, flexible execution, and organized documentation.
+---
 
-## Project Structure
+## Core Capabilities
 
-```
-LeetCodeSolutions/
-├── build.xml           # The core Ant build file
-├── src/                # All Java source code (.java files)
-├── build/              # Compiled classes (.class files) (Ignored by Git)
-├── dist/               # Final JAR files (Ignored by Git)
-└── doc/                # Javadoc documentation (Ignored by Git)
-```
+The centralized `build.xml` file is configured to handle all project workflow stages:
 
-## Ant Build Capabilities
+* **Cleanup & Setup:** Deleting old artifacts (`clean`) and creating output directories.
+* **Flexible Compilation:** Compiling the entire codebase (`compile`) or a single, specific file (`compile-file`).
+* **Execution & Testing:** Running all integrated test suites via the `MasterTestRunner` (`execute-main`).
+* **Documentation:** Generating Javadoc HTML documentation (`javadoc`).
+* **Packaging:** Creating two distinct JAR files in `dist/`: one for **compiled classes** and one for **documentation**.
 
-The `build.xml` file is configured to execute all required tasks:
-
-| Ant Target | Description |
-| :--- | :--- |
-| `clean` | Deletes the generated `build`, `dist`, and `doc` folders. |
-| `compile-all` | Compiles **the entire codebase** from the `src` directory. |
-| `compile-single` | Compiles **only a specified single `.java` file** (requires argument). |
-| `execute-main` | Executes the designated main class of the project. |
-| `execute-single` | Executes a **specified Java file** with a `main` method (requires argument). |
-| `javadoc` | Generates HTML documentation from Javadoc comments and places it in the `doc` folder. |
-| `jar-classes` | Creates a JAR file containing all **compiled classes** from `build/`. |
-| `jar-docs` | Creates a separate JAR file containing all **documentation** from `doc/`. |
-| `build` | The primary target; runs `clean`, `compile-all`, `javadoc`, `jar-classes`, and `jar-docs`. |
+---
 
 ## Getting Started
 
-1.  **Clone** the repository.
-
-2.  Ensure you have **Apache Ant** installed and configured in your environment path.
-
-3.  Execute the default build to compile and package everything:
+1.  Ensure **Apache Ant** is installed and configured in your system environment path.
+2.  Run the primary target to execute the full process:
 
     ```bash
     ant build
     ```
+
+### Key Targets
+
+| Target | Description |
+| :--- | :--- |
+| `build` | Runs the full sequence: **compile**, **javadoc**, and **package**. |
+| `execute-main` | Executes the `MasterTestRunner` to run all solution test cases. |
+| `execute-single` | Runs a specific class: `ant execute-single -Dclass=MyPackage.MySolution` |
+
+---
+
+## Project Structure (Managed by Ant)
