@@ -5,6 +5,13 @@ import DelaCruz_Mabalot.H4_MedianOfTwoSortedArrays.MedianOfTwoSortedArrays;
 import DelaCruz_Mabalot.M2_AddTwoNumbers.AddTwoNumbers;
 import DelaCruz_Mabalot.M3_LongestSubstringWithoutRepeatingCharacters.LongestSubstringWithoutRepeatingCharacters;
 
+import Abluyon_Aquino.E18_MaxArray.MaxSubArray;
+import Abluyon_Aquino.E20_BubbleSort.BubbleSort;
+import Abluyon_Aquino.E24_TwoSum.TwoSum;
+import Abluyon_Aquino.M12_IntegerToRoman.IntegerToRoman;
+import Abluyon_Aquino.M35_RotateArray.RotateArray;
+import Abluyon_Aquino.H65_ValidNumber.ValidNumber;
+
 public class MasterTestRunner {
 
     public static void main(String[] args) {
@@ -39,7 +46,42 @@ public class MasterTestRunner {
             System.out.println("\n--- RUNNING TEST SUITE: Median of Two Sorted Arrays (Hard - 4) ---");
             MedianOfTwoSortedArrays.main(new String[]{});
 
-            // add other classes.main() here
+            // Aquino-Abluyon classes.main() here
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n----- RUNNING TEST DIRECTORY: Abluyon_Aquino -----");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Max SubArray (Easy - 18) ---");
+            MaxSubArray.main(new String[]{});
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Bubble Sort (Easy - 20) ---");
+            BubbleSort.main(new String[]{});
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Two Sum (Easy - 24) ---");
+            TwoSum.main(new String[]{});
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Integer to Roman (Medium - 12) ---");
+            IntegerToRoman.main(new String[]{});
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Rotate Array (Medium - 35) ---");
+            RotateArray.main(new String[]{});
+
+            System.out.println("\n==========================================================================");
+
+            System.out.println("\n--- RUNNING TEST SUITE: Valid Number (Hard - 65) ---");
+            ValidNumber.main(new String[]{});
+
+            //other classes.main() here
+            // --
 
         } catch (Exception e) {
             System.err.println("\nFATAL ERROR DURING TEST EXECUTION:");
